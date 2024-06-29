@@ -1,0 +1,61 @@
+﻿<Page x:Class="CosmeticHealth.AddPages.AddProductIngridient"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:CosmeticHealth.AddPages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="AddProductIngridient" >
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="500"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Content="Редактирование Продукта и Ингредиента" Style="{StaticResource Titles}"/>
+        <Button Grid.Column="1" Grid.Row="1" Style="{StaticResource WinButton}" VerticalAlignment="Center" Command="{Binding Accept}" Content="Подтвердить">
+            <Button.IsEnabled>
+                <MultiBinding Converter="{StaticResource hasErrors}">
+                    <Binding ElementName="prod" Path="(Validation.HasError)"/>
+                    <Binding ElementName="ing" Path="(Validation.HasError)"/>
+                    <Binding ElementName="proc" Path="(Validation.HasError)"/>
+                </MultiBinding>
+            </Button.IsEnabled>
+        </Button>
+        <Button Grid.Column="1" Grid.Row="2" Style="{StaticResource WinButton}" VerticalAlignment="Center" Command="{Binding Back}">Отмена</Button>
+        <StackPanel Grid.Row="1" Grid.Column="0" Grid.RowSpan="2">
+
+            <Label Style="{StaticResource LoginPass}">Продукт</Label>
+            <ComboBox Style="{StaticResource Filters}" x:Name="prod" ItemsSource="{Binding Products}" SelectedItem="{Binding ProductIngredient.Product, ValidatesOnDataErrors=True}">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock>
+                            <Run Text="{Binding ProductName}"/>
+                        </TextBlock>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate> 
+            </ComboBox>
+            <TextBlock Foreground="Red" Text="{Binding ElementName=prod, Path=(Validation.Errors)[0].ErrorContent}" />
+            <Label Style="{StaticResource LoginPass}">Ингредиент</Label>
+            <ComboBox Style="{StaticResource Filters}" x:Name="ing" ItemsSource="{Binding Ingredients}" SelectedItem="{Binding ProductIngredient.Ingredient, ValidatesOnDataErrors=True}">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock>
+                            <Run Text="{Binding NameIngredient}"/>
+                        </TextBlock>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
+            <TextBlock Foreground="Red" Text="{Binding ElementName=ing, Path=(Validation.Errors)[0].ErrorContent}" />
+            <Label Style="{StaticResource LoginPass}">Процент</Label>
+            <TextBox Style="{StaticResource LogPass}" x:Name="proc" Text="{Binding ProductIngredient.Procent, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+            <TextBlock Foreground="Red" Text="{Binding ElementName=proc, Path=(Validation.Errors)[0].ErrorContent}" />
+        </StackPanel>
+    </Grid>
+</Page>

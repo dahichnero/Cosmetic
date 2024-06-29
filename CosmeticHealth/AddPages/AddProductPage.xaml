@@ -1,0 +1,96 @@
+﻿<Page x:Class="CosmeticHealth.AddPages.AddProductPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:CosmeticHealth.AddPages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="AddProductPage" >
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="500"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Content="Редактирование продукта" Style="{StaticResource Titles}"/>
+        <Button Grid.Column="1" Grid.Row="1" Style="{StaticResource WinButton}" Command="{Binding Accept}" VerticalAlignment="Center" Content="Подтвердить">
+            <Button.IsEnabled>
+                <MultiBinding Converter="{StaticResource hasErrors}">
+                    <Binding ElementName="nameProduct" Path="(Validation.HasError)"/>
+                    <Binding ElementName="descPro" Path="(Validation.HasError)"/>
+                    <Binding ElementName="howPro" Path="(Validation.HasError)"/>
+                    <Binding ElementName="imagePro" Path="(Validation.HasError)"/>
+                    <Binding ElementName="typeCB" Path="(Validation.HasError)"/>
+                    <Binding ElementName="typeSkin" Path="(Validation.HasError)"/>
+                    <Binding ElementName="brandCB" Path="(Validation.HasError)"/>
+                    <Binding ElementName="irritantCB" Path="(Validation.HasError)"/>
+                </MultiBinding>
+            </Button.IsEnabled>
+        </Button>
+        <Button Grid.Column="1" Grid.Row="2" Style="{StaticResource WinButton}" Command="{Binding Back}" VerticalAlignment="Center">Отмена</Button>
+        <StackPanel Grid.Row="1" Grid.Column="0" Grid.RowSpan="2">
+            <Label Style="{StaticResource LoginPass}">Название продукта</Label>
+            <TextBox Height="30" Style="{StaticResource LogPass}" x:Name="nameProduct" Text="{Binding Product.ProductName, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+            <TextBlock Foreground="Red" Text="{Binding ElementName=nameProduct, Path=(Validation.Errors)[0].ErrorContent}" />
+            <Label Style="{StaticResource LoginPass}">Описание</Label>
+            <TextBox Height="30" Style="{StaticResource LogPass}" x:Name="descPro" Text="{Binding Product.Description, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+            <TextBlock Foreground="Red" Text="{Binding ElementName=descPro, Path=(Validation.Errors)[0].ErrorContent}" />
+            <Label Style="{StaticResource LoginPass}">Способ применения</Label>
+            <TextBox Height="30" Style="{StaticResource LogPass}" x:Name="howPro" Text="{Binding Product.HowUse, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+            <TextBlock Foreground="Red" Text="{Binding ElementName=howPro, Path=(Validation.Errors)[0].ErrorContent}" />
+            <Label Style="{StaticResource LoginPass}">Изображение</Label>
+            <TextBox Height="30" Style="{StaticResource LogPass}" x:Name="imagePro" Text="{Binding Product.Image, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+            <TextBlock Foreground="Red" Text="{Binding ElementName=imagePro, Path=(Validation.Errors)[0].ErrorContent}" />
+            <Label Style="{StaticResource LoginPass}">Вид продукта</Label>
+            <ComboBox Style="{StaticResource Filters}" x:Name="typeCB" ItemsSource="{Binding TypeOfProducts}" SelectedItem="{Binding Product.Type, ValidatesOnDataErrors=True}">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock>
+                            <Run Text="{Binding NameTypeOfProduct}"/>
+                        </TextBlock>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
+            <TextBlock Foreground="Red" Text="{Binding ElementName=typeCB, Path=(Validation.Errors)[0].ErrorContent}" />
+            <Label Style="{StaticResource LoginPass}">Тип кожи</Label>
+            <ComboBox Style="{StaticResource Filters}" x:Name="typeSkin" ItemsSource="{Binding TypeOfSkins}" SelectedItem="{Binding Product.TypeOfSkin, ValidatesOnDataErrors=True}">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock>
+                            <Run Text="{Binding TypeOfSkinName}"/>
+                        </TextBlock>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
+            <TextBlock Foreground="Red" Text="{Binding ElementName=typeSkin, Path=(Validation.Errors)[0].ErrorContent}" />
+            <Label Style="{StaticResource LoginPass}">Бренд</Label>
+            <ComboBox Style="{StaticResource Filters}" x:Name="brandCB" ItemsSource="{Binding Brands}" SelectedItem="{Binding Product.Brand, ValidatesOnDataErrors=True}">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock>
+                            <Run Text="{Binding NameBrand}"/>
+                        </TextBlock>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
+            <TextBlock Foreground="Red" Text="{Binding ElementName=brandCB, Path=(Validation.Errors)[0].ErrorContent}" />
+            <Label Style="{StaticResource LoginPass}">Раздражители</Label>
+            <ComboBox Style="{StaticResource Filters}" x:Name="irritantCB" ItemsSource="{Binding Irritants}" SelectedItem="{Binding Product.Irritant, ValidatesOnDataErrors=True}">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock>
+                            <Run Text="{Binding IrritantName}"/>
+                        </TextBlock>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
+            <TextBlock Foreground="Red" Text="{Binding ElementName=irritantCB, Path=(Validation.Errors)[0].ErrorContent}" />
+        </StackPanel>
+    </Grid>
+</Page>

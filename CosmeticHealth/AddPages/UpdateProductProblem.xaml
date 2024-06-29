@@ -1,0 +1,71 @@
+﻿<Page x:Class="CosmeticHealth.AddPages.UpdateProductProblem"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:CosmeticHealth.AddPages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="UpdateProductProblem">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <StackPanel Orientation="Horizontal" Style="{StaticResource Search}" Grid.Row="0">
+            <Button Style="{StaticResource More}" Command="{Binding DeleteProductProblem}" IsEnabled="{Binding CanEditProduct}">
+                <Image Height="30" Width="30" Source="/Images/delete.png"/>
+                <Button.ToolTip>
+                    <ToolTip>
+                        <Label Content="Удалить продукт" Style="{StaticResource ToolTips}"/>
+                    </ToolTip>
+                </Button.ToolTip>
+            </Button>
+            <Button Style="{StaticResource More}" Command="{Binding UpdateProductProblem}" IsEnabled="{Binding CanEditProduct}">
+                <Image Height="30" Width="30" Source="/Images/update.png"/>
+                <Button.ToolTip>
+                    <ToolTip>
+                        <Label Content="Изменить продукт и магазин" Style="{StaticResource ToolTips}"/>
+                    </ToolTip>
+                </Button.ToolTip>
+            </Button>
+            <Button Style="{StaticResource More}" Command="{Binding Back}">
+                <Image Height="30" Width="30" Source="/Images/back.png"/>
+                <Button.ToolTip>
+                    <ToolTip>
+                        <Label Content="Назад" Style="{StaticResource ToolTips}"/>
+                    </ToolTip>
+                </Button.ToolTip>
+            </Button>
+        </StackPanel>
+        <ListView Grid.Row="1" ItemsSource="{Binding ProductProblems}" SelectedItem="{Binding SelectedProductProblem}" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Style="{StaticResource Cosmetic}" MaxHeight="700" >
+
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <Border CornerRadius="10" BorderThickness="8" BorderBrush="White">
+                        <StackPanel Style="{StaticResource Element}">
+
+                            <Image Margin="5" Height="200" Width="200" Source="{Binding ProductNavigation.Image}"></Image>
+                            <StackPanel HorizontalAlignment="Center">
+                                <TextBlock TextWrapping="Wrap">
+                                <Run Text="{Binding ProductNavigation.ProductName}"></Run>
+                                <LineBreak/>
+                                <Run Text="{Binding ProblemNavigation.ProblemName}"/>
+                                <LineBreak/>
+                                </TextBlock>
+                            </StackPanel>
+                        </StackPanel>
+
+                    </Border>
+                </DataTemplate>
+
+            </ListView.ItemTemplate>
+            <ListView.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel />
+                </ItemsPanelTemplate>
+            </ListView.ItemsPanel>
+        </ListView>
+    </Grid>
+</Page>

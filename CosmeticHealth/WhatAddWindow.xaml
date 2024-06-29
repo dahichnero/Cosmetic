@@ -1,0 +1,19 @@
+﻿<Window x:Class="CosmeticHealth.WhatAddWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:CosmeticHealth"
+        mc:Ignorable="d"
+        Title="WhatAddWindow" Style="{StaticResource NonBasic}" WindowStartupLocation="CenterScreen">
+    <StackPanel>
+        <Label Style="{StaticResource Titles}" Margin="10">Что необходимо добавить?</Label>
+        <Button Click="AddProduct" Style="{StaticResource WinButton}">Продукт</Button>
+        <Button Click="AddProblem" Style="{StaticResource WinButton}">Проблема</Button>
+        <Button Click="AddBrand" Style="{StaticResource WinButton}">Бренд</Button>
+        <Button Click="AddSymptom" Style="{StaticResource WinButton}">Симптом</Button>
+        <Button Click="AddIngridient" Style="{StaticResource WinButton}">Ингредиент</Button>
+        <Button Click="AddShop" Style="{StaticResource WinButton}">Магазин</Button>
+        <Button Click="DLC" Style="{StaticResource WinButton}">Другое...</Button>
+    </StackPanel>
+</Window>

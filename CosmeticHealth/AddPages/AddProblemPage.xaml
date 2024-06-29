@@ -1,0 +1,40 @@
+﻿<Page x:Class="CosmeticHealth.AddPages.AddProblemPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:CosmeticHealth.AddPages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="AddProblemPage">
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="500"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Content="Добавление проблемы" Style="{StaticResource Titles}"/>
+        <Button Grid.Column="1" Grid.Row="1" Style="{StaticResource WinButton}" VerticalAlignment="Bottom" Content="Подтвердить" Command="{Binding Accept}">
+            <Button.IsEnabled>
+                <MultiBinding Converter="{StaticResource hasErrors}">
+                    <Binding ElementName="nameProblem" Path="(Validation.HasError)"/>
+                    <Binding ElementName="years" Path="(Validation.HasError)"/>
+                </MultiBinding>
+            </Button.IsEnabled>
+        </Button>
+        <Button Grid.Column="1" Grid.Row="2" Style="{StaticResource WinButton}" VerticalAlignment="Center" Command="{Binding Back}">Отмена</Button>
+        <StackPanel Grid.Row="1" Grid.Column="0" Grid.RowSpan="2">
+            <Label Style="{StaticResource LoginPass}" >Название проблемы</Label>
+            <TextBox Style="{StaticResource LogPass}" x:Name="nameProblem" Text="{Binding Problem.ProblemName, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+            <TextBlock Foreground="Red" Text="{Binding ElementName=nameProblem, Path=(Validation.Errors)[0].ErrorContent}" />
+            <Label Style="{StaticResource LoginPass}">Сколько лет уйдёт на лечение</Label>
+            <TextBox Style="{StaticResource LogPass}" x:Name="years" Text="{Binding Problem.YearsToSolve, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+            <TextBlock Foreground="Red" Text="{Binding ElementName=years, Path=(Validation.Errors)[0].ErrorContent}" />
+        </StackPanel>
+    </Grid>
+</Page>

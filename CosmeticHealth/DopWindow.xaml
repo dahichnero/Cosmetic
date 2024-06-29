@@ -1,0 +1,17 @@
+﻿<Window x:Class="CosmeticHealth.DopWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:CosmeticHealth"
+        mc:Ignorable="d"
+        Title="DopWindow" Style="{StaticResource NonBasic}" WindowStartupLocation="CenterScreen">
+    <StackPanel>
+        <Label Style="{StaticResource Titles}">Добавить...</Label>
+        <Button Click="AddPrSym" Style="{StaticResource WinButton}">Проблема и Симптом</Button>
+        <Button Click="AddPrType" Style="{StaticResource WinButton}">Проблема и Тип кожи</Button>
+        <Button Click="AddProdPr" Style="{StaticResource WinButton}">Продукт и Проблема</Button>
+        <Button Click="AddProdShop" Style="{StaticResource WinButton}">Продукт и Магазин</Button>
+        <Button Click="AddPrIng" Style="{StaticResource WinButton}">Продукт и Ингредиент</Button>
+    </StackPanel>
+</Window>

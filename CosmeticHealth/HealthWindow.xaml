@@ -1,0 +1,50 @@
+﻿<Window x:Class="CosmeticHealth.HealthWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:CosmeticHealth"
+        mc:Ignorable="d"
+        Title="HealthWindow" WindowState="Maximized" Style="{StaticResource MainMain}">
+    <StackPanel>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+            <Image Height="100" Width="100" Source="/Images/main.png" ></Image>
+            <Label Style="{StaticResource Titles}" Padding="20" Margin="10" HorizontalAlignment="Center">Лечебная косметика</Label>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                <Button Style="{StaticResource Help}" Command="{Binding AddCommand}" Visibility="{Binding AdminOrClient, Converter={StaticResource bVC}}">
+                    <Image Source="/Images/add.png" Width="50" Height="50"></Image>
+                    <Button.ToolTip>
+                        <ToolTip>
+                            <Label Content="Добавить" Style="{StaticResource ToolTips}"/>
+                        </ToolTip>
+                    </Button.ToolTip>
+                </Button>
+                <Button Style="{StaticResource Help}" Command="{Binding TypeOfSkinWhat}">
+                    <Image Source="/Images/drop.png" Width="50" Height="50"></Image>
+                    <Button.ToolTip>
+                        <ToolTip>
+                            <Label Content="О коже" Style="{StaticResource ToolTips}"/>
+                        </ToolTip>
+                    </Button.ToolTip>
+                </Button>
+                <Button Style="{StaticResource Help}" Command="{Binding HelpWith}">
+                    <Image Source="/Images/question.png" Width="50" Height="50"></Image>
+                    <Button.ToolTip>
+                        <ToolTip>
+                            <Label Content="Узнать о симптомах" Style="{StaticResource ToolTips}"/>
+                        </ToolTip>
+                    </Button.ToolTip>
+                </Button>
+                <Button Style="{StaticResource Help}" Click="Button_Click">
+                    <Image Source="/Images/sighout.png" Width="50" Height="50"></Image>
+                    <Button.ToolTip>
+                        <ToolTip>
+                            <Label Content="Выйти из системы" Style="{StaticResource ToolTips}"/>
+                        </ToolTip>
+                    </Button.ToolTip>
+                </Button>
+            </StackPanel>
+        </StackPanel>
+        <Frame x:Name="mainFrame" Content="{Binding CurrentPage}"></Frame>
+    </StackPanel>
+</Window>
